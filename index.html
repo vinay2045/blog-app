@@ -5,6 +5,19 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+     <script>
+    // Immediately set data-theme to avoid flash
+    (function() {
+      const key = 'theme-preference';
+      const ls = localStorage.getItem(key);
+      const prefers = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+      const theme = ls || prefers;
+      document.documentElement.setAttribute('data-theme', theme);
+
+      // Also write back in case we fell back to prefers
+      localStorage.setItem(key, theme);
+    })();
+  </script>
     <link rel="preload" href="style.css" as="style">
     <link rel="preload" href="script.js" as="script">
     <link rel="preconnect" href="https://fonts.gstatic.com">
