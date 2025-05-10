@@ -7,9 +7,7 @@ html,body{
     height: 100%;
     width: 100%;
     font-family: "JetBrains Mono", monospace;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    transition: none !important;
 }
 body {
     display: flex;
@@ -18,29 +16,26 @@ body {
 }
 .writeablogtitle{
     margin-top: 3rem;
+    color: var(--icon-fill);
 }
 .topics-selection{
     display: flex;
+    flex-wrap: wrap;
     gap: 1rem;
     margin-top: 2rem;
 }
 .topics-selection span{
     font-size: 1rem;
-    width: 100%;
     font-weight: 600;
     color: var(--icon-fill);
     padding: 0.5rem 1rem;
     
     border: 1px solid var(--icon-fill);
-    pointer-events: all;
     cursor: pointer;
-   
-    
 }
 .blog-topics-selected {
     display: block;
     width: 100%;
-    box-sizing: border-box;
     margin: 2rem 0 0 0;
     padding: 0;
     font-size: 1.4rem;
@@ -60,7 +55,6 @@ form{
     flex-direction: column;
   
     gap: 2rem;
-    width: 100%;
 }
 label{
     font-size: 1.3rem;
@@ -98,13 +92,13 @@ label{
 .custom-upload-button{
     border: 1px solid var(--icon-fill);
     padding: .8rem;
+    cursor: pointer;
 }
 .blog-title{
     width: 100%;
-    box-sizing: border-box;
     margin: 2rem 0 0 0;
     padding: 0;
-    font-size: 1.5rem;
+    font-size: 2rem;
     border: none;
     
     background-color: transparent;
@@ -112,17 +106,16 @@ label{
     color: var(--icon-fill);
     box-shadow: none;
    
-    font-size: 2rem;
-    font-family: jetbrains mono;
+    font-family: "JetBrains Mono", monospace;
 }
 .blog-content {
     width: 100%;
     height: 40rem;
-    box-sizing: border-box;
     margin: 2rem 0 0 0;
     padding: 1rem;
     font-size: 1.3rem;
-    border: none;
+    border: 1px solid rgba(128, 128, 128, 0.3);
+    border-radius: 4px;
     background-color: transparent;
     outline: none;
     color: var(--icon-fill);
@@ -130,28 +123,10 @@ label{
     overflow-y: auto;
     white-space: pre-wrap;
     line-height: 1.6;
-    border: 1px solid rgba(var(--icon-fill-rgb), 0.1);
+}
+.blog-content img {
+    max-width: 100%;
+    height: auto;
+    margin: 1rem 0;
     border-radius: 4px;
-
-    /* Placeholder styling */
-    &[data-placeholder]:empty:before {
-        content: attr(data-placeholder);
-        color: rgba(var(--icon-fill-rgb), 0.5);
-    }
-
-    /* Rich text content styling */
-    p {
-        margin: 1em 0;
-    }
-
-    img {
-        max-width: 100%;
-        height: auto;
-        margin: 1rem 0;
-        border-radius: 4px;
-    }
-
-    /* Keep scrollbar styles from previous answer */
-   
-    scrollbar-width: thin;
 }

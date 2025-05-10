@@ -4,23 +4,85 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Write a Blog</title>
+    
+    <!-- Critical CSS to prevent flash -->
+    <style>
+        :root {
+            --icon-fill: #000;
+            --icon-fill-hover: #555;
+            background-color: #fff;
+            color: #000;
+        }
+        
+        [data-theme="dark"] {
+            --icon-fill: #fff;
+            --icon-fill-hover: #aaa;
+            background-color: #121212;
+            color: #fff;
+        }
+        
+        html, body {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            width: 100%;
+            font-family: "JetBrains Mono", monospace;
+            /* Remove transitions to prevent flash */
+            transition: none !important;
+        }
+        
+        main {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+        
+        .nav {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            padding: 1rem 0;
+        }
+        
+        /* Force content to be visible immediately with correct theme */
+        body {
+            visibility: visible !important;
+            opacity: 1 !important;
+        }
+    </style>
+    
+    <!-- Immediate theme initialization to prevent flash -->
+    <script>
+        (function() {
+            const key = 'theme-preference';
+            const ls = localStorage.getItem(key);
+            const prefers = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+            const theme = ls || prefers;
+            document.documentElement.setAttribute('data-theme', theme);
+            localStorage.setItem(key, theme);
+        })();
+    </script>
+
+    <!-- Preload critical resources -->
     <link rel="preload" href="style.css" as="style">
+    <link rel="preload" href="writeablog.css" as="style">
     <link rel="preload" href="script.js" as="script">
-    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    
+    <!-- Non-critical CSS -->
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="writeablog.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&display=swap" rel="stylesheet">
 </head>
 <body>
     <main>
         <div class="nav">
             <a href="index.html">home</a>
-            <a href="writeablog.html " class="writeblog">write a blog... </a>
-            <a href="leader.html ">leader board</a>
-            <a href="contactus.html ">contact us </a>
+            <a href="writeablog.html" class="writeblog">write a blog...</a>
+            <a href="leader.html">leader board</a>
+            <a href="contactus.html">contact us</a>
            
             <button class="theme-toggle" id="theme-toggle" title="Toggles light & dark" aria-label="auto" aria-live="polite">
                 <svg class="sun-and-moon" aria-hidden="true" width="24" height="24" viewBox="0 0 24 24">
@@ -57,7 +119,7 @@
             </div>
             <input type="text" class="blog-topics-selected" placeholder="drop your topics for your lovely blog" required>
             <label for="fileUpload" class="upload-label">
-                <span class="custom-upload-button">hey mate ..! upload your banner image</span>
+                <span class="custom-upload-button">hey mate ..! upload your banner image here</span>
                 <input
                     type="file"
                     id="fileUpload"
@@ -73,14 +135,7 @@
         </form>
     </main>
 
-    <script src="script.js"></script>
-    <script>
-        // Critical theme initialization
-        (function() {
-            const storedTheme = localStorage.getItem('theme-preference') || 
-                (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
-            document.documentElement.setAttribute('data-theme', storedTheme);
-        })();
-    </script>
+    <!-- Single script inclusion at the end -->
+    <script src="script.js" defer></script>
 </body>
 </html>
